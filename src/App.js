@@ -32,13 +32,13 @@ function App() {
             </button>
             <div className='dropdown-menu' aria-labelledby='categoryDropdown'>
               <a className='dropdown-item' href='#'>
-                Action
+                Study
               </a>
               <a className='dropdown-item' href='#'>
-                Another action
+                Workout
               </a>
               <a className='dropdown-item' href='#'>
-                Something else here
+                Housekeeping
               </a>
             </div>
           </div>
