@@ -53,79 +53,72 @@ function App() {
             00:00:00
           </div>
         </div>
-        <div className='row mt-5'>
-          <table className='table table-hover'>
-            <thead scope='col'>
-              <tr>
-                <th>Today</th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Learn about React</td>
-                <td>9:00 - 10:00</td>
-                <td>
-                  <button className='btn btn-danger'>Remove</button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span>Learn about JSX</span>
-                  <span class='badge badge-info ml-2'>study</span>
-                </td>
-                <td>10:05 - 12:00</td>
-                <td>
-                  <button className='btn btn-danger'>Remove</button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span>Learn about virtual DOM</span>
-                  <span class='badge badge-info ml-2'>study</span>
-                </td>
-                <td>13:35 - 14:00</td>
-                <td>
-                  <button className='btn btn-danger'>Remove</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+
+        <div className='my-3 bg-white rounded shadow-sm'>
+          <h6 className='border-bottom border-gray p-3 mb-4'>Today</h6>
+          <div className='row m-2 py-2 border-bottom border-gray align-items-center d-flex justify-content-between'>
+            <div className='col'>
+              <span>Learn about React</span>
+              <span className='ml-2 badge badge-info'>Study</span>
+            </div>
+            <div className='col'>9:00:00 - 10:00:23</div>
+            <div className=''>
+              <button class='btn btn-danger'>Remove</button>
+            </div>
+          </div>
+          <div className='row m-2 py-2 border-bottom border-gray align-items-center d-flex justify-content-between'>
+            <div className='col'>
+              <span>Go to gym</span>
+              <span className='ml-2 badge badge-warning'>Workout</span>
+            </div>
+            <div className='col'>9:00:00 - 10:00:23</div>
+            <div className=''>
+              <button class='btn btn-danger'>Remove</button>
+            </div>
+          </div>
+          <div className='row m-2 py-2 align-items-center d-flex justify-content-between'>
+            <div className='col'>
+              <span>Learn how to cook</span>
+              <span className='ml-2 badge badge-info'>Study</span>
+            </div>
+            <div className='col'>9:00:00 - 10:00:23</div>
+            <div className=''>
+              <button class='btn btn-danger'>Remove</button>
+            </div>
+          </div>
         </div>
 
-        <div className='row'>
-          <table className='table table-hover'>
-            <thead scope='col'>
-              <tr>
-                <th>Yesterday</th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <span>Learn about JavaScript</span>
-                  <span class='badge badge-info ml-2'>study</span>
-                </td>
-                <td>10:35 - 12:00</td>
-                <td>
-                  <button className='btn btn-danger'>Remove</button>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span>Dance with friends</span>
-                  <span class='badge badge-warning ml-2'>Workout</span>
-                </td>
-                <td>13:35 - 14:00</td>
-                <td>
-                  <button className='btn btn-danger'>Remove</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div className='my-3 bg-white rounded shadow-sm'>
+          <h6 className='border-bottom border-gray p-3 mb-4'>Yesterday</h6>
+          <div className='row m-2 py-2 border-bottom border-gray align-items-center d-flex justify-content-between'>
+            <div className='col'>
+              <span>Learn about React</span>
+              <span className='ml-2 badge badge-info'>Study</span>
+            </div>
+            <div className='col'>9:00:00 - 10:00:23</div>
+            <div className=''>
+              <button class='btn btn-danger'>Remove</button>
+            </div>
+          </div>
+          <div className='row m-2 py-2 border-bottom border-gray align-items-center d-flex justify-content-between'>
+            <div className='col'>
+              <span>Go to gym</span>
+              <span className='ml-2 badge badge-warning'>Workout</span>
+            </div>
+            <div className='col'>9:00:00 - 10:00:23</div>
+            <div className=''>
+              <button class='btn btn-danger'>Remove</button>
+            </div>
+          </div>
+          <div className='row m-2 py-2 align-items-center d-flex justify-content-between'>
+            <div className='col'>
+              <span>Learn how to cook</span>
+            </div>
+            <div className='col'>9:00:00 - 10:00:23</div>
+            <div className=''>
+              <button class='btn btn-danger'>Remove</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
