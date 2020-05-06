@@ -89,10 +89,9 @@ class App extends React.Component {
                 id='category'
                 style={{ height: '45px' }}
                 onChange={this.onDropdownChange}
+                defaultValue='Category'
               >
-                <option selected disabled>
-                  Category
-                </option>
+                <option disabled>Category</option>
                 <option selected={this.state.category === 'Study'}>Study</option>
                 <option selected={this.state.category === 'Workout'}>Workout</option>
                 <option selected={this.state.category === 'Housekeeping'}>Housekeeping</option>
@@ -135,7 +134,7 @@ class App extends React.Component {
           </div>
 
           {this.state.allTasks ? (
-            <div class='text-center p-5 my-3 rounded shadow-sm text-dark'>
+            <div className='text-center p-5 my-3 rounded shadow-sm text-dark'>
               <span>No task yet</span>
             </div>
           ) : (
