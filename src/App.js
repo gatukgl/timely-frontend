@@ -54,8 +54,8 @@ class App extends React.Component {
       const task = {
         name: this.state.task,
         category: this.state.category,
-        startedAt: this.state.startAt,
-        endedAt: this.state.endAt
+        started_at: this.state.startAt,
+        ended_at: this.state.endAt
       }
       this.createTask(task)
     }
