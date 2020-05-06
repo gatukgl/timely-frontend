@@ -1,13 +1,15 @@
 import React from 'react'
 import axios from 'axios'
+import Stopwatch from 'react-stopwatch'
 
 class App extends React.Component {
   state = {
     allTasks: [],
     task: '',
     category: '',
-    start_at: '',
-    end_at: ''
+    isWatchStarted: false,
+    startAt: '',
+    endAt: ''
   }
 
   componentDidMount() {
@@ -26,6 +28,15 @@ class App extends React.Component {
 
   onDropdownChange = (event) => {
     this.setState({ category: event.target.value })
+  }
+
+  onTimeChange = ({ hours, minutes, seconds }) => {
+    console.log(hours, minutes, seconds)
+  }
+
+  onStartWatch = (isStart) => () => {
+    this.setState({ isWatchStarted: isStart })
+    isStart ? this.setState({ startAt: Date.now() }) : this.setState({ endAt: Date.now() })
   }
 
   render() {
@@ -67,13 +78,38 @@ class App extends React.Component {
             </div>
 
             <div className='col'>
-              <button type='button' className='btn btn-success btn-lg'>
-                Start
-              </button>
+              {this.state.isWatchStarted ? (
+                <button
+                  type='button'
+                  className='btn btn-danger btn-lg'
+                  onClick={this.onStartWatch(false)}
+                >
+                  Stop
+                </button>
+              ) : (
+                <button
+                  type='button'
+                  className='btn btn-success btn-lg'
+                  onClick={this.onStartWatch(true)}
+                >
+                  Start
+                </button>
+              )}
             </div>
 
             <div className='col' style={{ fontSize: '1.9em' }}>
-              00:00:00
+              {this.state.isWatchStarted ? (
+                <Stopwatch
+                  autoStart={true}
+                  seconds={0}
+                  minutes={0}
+                  hours={0}
+                  onChange={this.onTimeChange}
+                  render={({ formatted }) => <p>{formatted}</p>}
+                />
+              ) : (
+                '00:00:00'
+              )}
             </div>
           </div>
 
