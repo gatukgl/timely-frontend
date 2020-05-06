@@ -6,6 +6,7 @@ import * as R from 'ramda'
 
 import { NavBar } from './NavBar'
 import { TaskInput } from './TaskInput'
+import { Categories } from './Categories'
 
 const BASE_URL = 'http://localhost:8000'
 class App extends React.Component {
@@ -101,21 +102,7 @@ class App extends React.Component {
         <div className='container' role='main' style={{ marginTop: '100px' }}>
           <div className='row'>
             <TaskInput state={this.state} onChange={this.onTextChange} />
-            <div className='form-group'>
-              <select
-                className='form-control form-control-lg custom-select'
-                id='category'
-                style={{ height: '45px' }}
-                onChange={this.onDropdownChange}
-                defaultValue='Category'
-              >
-                <option disabled>Category</option>
-                <option selected={this.state.category === 'Study'}>Study</option>
-                <option selected={this.state.category === 'Workout'}>Workout</option>
-                <option selected={this.state.category === 'Housekeeping'}>Housekeeping</option>
-              </select>
-            </div>
-
+            <Categories selectedCategory={this.state.category} onChange={this.onDropdownChange} />
             <div className='col'>
               {this.state.isWatchStarted ? (
                 <button
