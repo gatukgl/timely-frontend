@@ -7,6 +7,7 @@ import * as R from 'ramda'
 import { NavBar } from './NavBar'
 import { TaskInput } from './TaskInput'
 import { Categories } from './Categories'
+import { WatchToggledButton } from './WatchToggledButton'
 
 const BASE_URL = 'http://localhost:8000'
 class App extends React.Component {
@@ -103,25 +104,7 @@ class App extends React.Component {
           <div className='row'>
             <TaskInput state={this.state} onChange={this.onTextChange} />
             <Categories selectedCategory={this.state.category} onChange={this.onDropdownChange} />
-            <div className='col'>
-              {this.state.isWatchStarted ? (
-                <button
-                  type='button'
-                  className='btn btn-danger btn-lg'
-                  onClick={this.onStartWatch(false)}
-                >
-                  Stop
-                </button>
-              ) : (
-                <button
-                  type='button'
-                  className='btn btn-success btn-lg'
-                  onClick={this.onStartWatch(true)}
-                >
-                  Start
-                </button>
-              )}
-            </div>
+            <WatchToggledButton isStarted={this.state.isWatchStarted} onStart={this.onStartWatch} />
 
             <div className='col' style={{ fontSize: '1.9em' }}>
               {this.state.isWatchStarted ? (
