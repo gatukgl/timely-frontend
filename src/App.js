@@ -4,6 +4,9 @@ import Stopwatch from 'react-stopwatch'
 import { DateTime } from 'luxon'
 import * as R from 'ramda'
 
+import { NavBar } from './NavBar'
+import { TaskInput } from './TaskInput'
+
 const BASE_URL = 'http://localhost:8000'
 class App extends React.Component {
   state = {
@@ -94,25 +97,10 @@ class App extends React.Component {
   render() {
     return (
       <div className='App'>
-        <nav className='navbar navbar-expand-lg fixed-top navbar-dark bg-dark'>
-          <a className='navbar-brand mr-auto mr-lg-0' href='.'>
-            Timely
-          </a>
-        </nav>
-
+        <NavBar />
         <div className='container' role='main' style={{ marginTop: '100px' }}>
           <div className='row'>
-            <div className='col-7'>
-              <input
-                type='text'
-                placeholder='What are you working on?'
-                className='form-control form-control-lg'
-                value={this.state.task}
-                name='task'
-                onChange={this.onTextChange}
-              />
-            </div>
-
+            <TaskInput state={this.state} onChange={this.onTextChange} />
             <div className='form-group'>
               <select
                 className='form-control form-control-lg custom-select'
