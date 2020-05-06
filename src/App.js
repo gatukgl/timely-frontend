@@ -8,6 +8,7 @@ import { TaskInput } from './TaskInput'
 import { Categories } from './Categories'
 import { WatchToggledButton } from './WatchToggledButton'
 import { StopWatch } from './StopWatch'
+import { Task } from './Task'
 
 const BASE_URL = 'http://localhost:8000'
 class App extends React.Component {
@@ -116,20 +117,7 @@ class App extends React.Component {
             <div className='my-3 bg-white rounded shadow-sm'>
               <h6 className='border-bottom border-gray p-3 mb-4'>Today</h6>
               {this.state.allTasks.map((task) => (
-                <div key={task.id}>
-                  <div className='row m-2 py-2 border-bottom border-gray align-items-center d-flex justify-content-between'>
-                    <div className='col'>
-                      <span>{task.name}</span>
-                      <span className='ml-2 badge badge-info'>{task.category}</span>
-                    </div>
-                    <div className='col'>{`${task.startTime} - ${task.endTime}`}</div>
-                    <div className=''>
-                      <button className='btn btn-danger' onClick={this.removeTask(task.id)}>
-                        Remove
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                <Task task={task} removeTask={this.removeTask(task.id)} />
               ))}
             </div>
           )}
