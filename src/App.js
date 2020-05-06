@@ -20,7 +20,6 @@ class App extends React.Component {
 
   getTasks = () => {
     axios.get(`${BASE_URL}/tasks`).then((response) => {
-      console.log('response', response.data)
       this.setState({ allTasks: response.data })
     })
   }
@@ -55,13 +54,14 @@ class App extends React.Component {
         name: this.state.task,
         category: this.state.category,
         started_at: this.state.startAt,
-        ended_at: this.state.endAt
+        ended_at: currentDateTime
       }
       this.createTask(task)
     }
   }
 
   render() {
+    console.log('all tasks', this.state.allTasks)
     return (
       <div className='App'>
         <nav className='navbar navbar-expand-lg fixed-top navbar-dark bg-dark'>
@@ -133,43 +133,27 @@ class App extends React.Component {
             </div>
           </div>
 
-          {this.state.allTasks ? (
+          {this.state.allTasks.length < 1 ? (
             <div className='text-center p-5 my-3 rounded shadow-sm text-dark'>
               <span>No task yet</span>
             </div>
           ) : (
             <div className='my-3 bg-white rounded shadow-sm'>
-              <h6 className='border-bottom border-gray p-3 mb-4'>Today</h6>
-              <div className='row m-2 py-2 border-bottom border-gray align-items-center d-flex justify-content-between'>
-                <div className='col'>
-                  <span>Learn about React</span>
-                  <span className='ml-2 badge badge-info'>Study</span>
+              {this.state.allTasks.map((task) => (
+                <div key={task.name}>
+                  <h6 className='border-bottom border-gray p-3 mb-4'>Today</h6>
+                  <div className='row m-2 py-2 border-bottom border-gray align-items-center d-flex justify-content-between'>
+                    <div className='col'>
+                      <span>{task.name}</span>
+                      <span className='ml-2 badge badge-info'>{task.category}</span>
+                    </div>
+                    <div className='col'>{`${task.started_at} - ${task.ended_at}`}</div>
+                    <div className=''>
+                      <button className='btn btn-danger'>Remove</button>
+                    </div>
+                  </div>
                 </div>
-                <div className='col'>9:00:00 - 10:00:23</div>
-                <div className=''>
-                  <button class='btn btn-danger'>Remove</button>
-                </div>
-              </div>
-              <div className='row m-2 py-2 border-bottom border-gray align-items-center d-flex justify-content-between'>
-                <div className='col'>
-                  <span>Go to gym</span>
-                  <span className='ml-2 badge badge-warning'>Workout</span>
-                </div>
-                <div className='col'>9:00:00 - 10:00:23</div>
-                <div className=''>
-                  <button class='btn btn-danger'>Remove</button>
-                </div>
-              </div>
-              <div className='row m-2 py-2 align-items-center d-flex justify-content-between'>
-                <div className='col'>
-                  <span>Learn how to cook</span>
-                  <span className='ml-2 badge badge-info'>Study</span>
-                </div>
-                <div className='col'>9:00:00 - 10:00:23</div>
-                <div className=''>
-                  <button class='btn btn-danger'>Remove</button>
-                </div>
-              </div>
+              ))}
             </div>
           )}
         </div>
