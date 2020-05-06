@@ -24,6 +24,10 @@ class App extends React.Component {
     this.setState({ [name]: value })
   }
 
+  onDropdownChange = (event) => {
+    this.setState({ category: event.target.value })
+  }
+
   render() {
     return (
       <div className='App'>
@@ -35,7 +39,7 @@ class App extends React.Component {
 
         <div className='container' role='main' style={{ marginTop: '100px' }}>
           <div className='row'>
-            <div className='col-8'>
+            <div className='col-7'>
               <input
                 type='text'
                 placeholder='What are you working on?'
@@ -46,28 +50,20 @@ class App extends React.Component {
               />
             </div>
 
-            <div className='dropdown'>
-              <button
-                className='btn btn-lg btn-secondary dropdown-toggle'
-                type='button'
-                id='categoryDropdown'
-                data-toggle='dropdown'
-                aria-haspopup='true'
-                aria-expanded='true'
+            <div className='form-group'>
+              <select
+                className='form-control form-control-lg custom-select'
+                id='category'
+                style={{ height: '45px' }}
+                onChange={this.onDropdownChange}
               >
-                Category
-              </button>
-              <div className='dropdown-menu' aria-labelledby='categoryDropdown'>
-                <a className='dropdown-item' href='.'>
-                  Study
-                </a>
-                <a className='dropdown-item' href='.'>
-                  Workout
-                </a>
-                <a className='dropdown-item' href='.'>
-                  Housekeeping
-                </a>
-              </div>
+                <option selected disabled>
+                  Category
+                </option>
+                <option selected={this.state.category === 'Study'}>Study</option>
+                <option selected={this.state.category === 'Workout'}>Workout</option>
+                <option selected={this.state.category === 'Housekeeping'}>Housekeeping</option>
+              </select>
             </div>
 
             <div className='col'>
