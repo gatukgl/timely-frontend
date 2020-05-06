@@ -26,6 +26,7 @@ class App extends React.Component {
     const endTime = datetime.toLocaleString(DateTime.TIME_WITH_SECONDS)
 
     return {
+      id: task.id,
       name: task.name,
       category: task.category,
       startDate: startDate,
@@ -42,13 +43,16 @@ class App extends React.Component {
 
   createTask = (payload) => {
     axios.post(`${BASE_URL}/tasks`, payload).then((response) => {
-      return response.data
       const newTask = this.restructureTask(response.data)
       const allTasks = this.state.allTasks.concat(newTask)
       this.setState({
         allTasks
       })
     })
+  }
+
+  removeTask = (taskId) => () => {
+    axios.delete(`${BASE_URL}/tasks/${taskId}`)
   }
 
   onTextChange = (event) => {
@@ -160,7 +164,7 @@ class App extends React.Component {
             <div className='my-3 bg-white rounded shadow-sm'>
               <h6 className='border-bottom border-gray p-3 mb-4'>Today</h6>
               {this.state.allTasks.map((task) => (
-                <div key={task.name}>
+                <div key={task.id}>
                   <div className='row m-2 py-2 border-bottom border-gray align-items-center d-flex justify-content-between'>
                     <div className='col'>
                       <span>{task.name}</span>
@@ -168,7 +172,9 @@ class App extends React.Component {
                     </div>
                     <div className='col'>{`${task.startTime} - ${task.endTime}`}</div>
                     <div className=''>
-                      <button className='btn btn-danger'>Remove</button>
+                      <button className='btn btn-danger' onClick={this.removeTask(task.id)}>
+                        Remove
+                      </button>
                     </div>
                   </div>
                 </div>
