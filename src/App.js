@@ -4,6 +4,10 @@ import axios from 'axios'
 class App extends React.Component {
   state = {
     allTasks: [],
+    task: '',
+    category: '',
+    start_at: '',
+    end_at: ''
   }
 
   componentDidMount() {
@@ -11,6 +15,13 @@ class App extends React.Component {
       console.log(response.json())
       this.setState({ allTasks: response.json() })
     })
+  }
+
+  onTextChange = (event) => {
+    const {
+      target: { value, name }
+    } = event
+    this.setState({ [name]: value })
   }
 
   render() {
@@ -29,6 +40,9 @@ class App extends React.Component {
                 type='text'
                 placeholder='What are you working on?'
                 className='form-control form-control-lg'
+                value={this.state.task}
+                name='task'
+                onChange={this.onTextChange}
               />
             </div>
 
