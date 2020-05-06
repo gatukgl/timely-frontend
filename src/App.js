@@ -25,9 +25,12 @@ class App extends React.Component {
   }
 
   createTask = (payload) => {
-    console.log(payload)
-    axios.post(`${BASE_URL}/tasks`, payload).then(() => {
-      console.log('yay')
+    axios.post(`${BASE_URL}/tasks`, payload).then((response) => {
+      const newTask = response.data
+      const allTasks = this.state.allTasks.concat(newTask)
+      this.setState({
+        allTasks
+      })
     })
   }
 
@@ -139,9 +142,9 @@ class App extends React.Component {
             </div>
           ) : (
             <div className='my-3 bg-white rounded shadow-sm'>
+              <h6 className='border-bottom border-gray p-3 mb-4'>Today</h6>
               {this.state.allTasks.map((task) => (
                 <div key={task.name}>
-                  <h6 className='border-bottom border-gray p-3 mb-4'>Today</h6>
                   <div className='row m-2 py-2 border-bottom border-gray align-items-center d-flex justify-content-between'>
                     <div className='col'>
                       <span>{task.name}</span>
