@@ -75,7 +75,7 @@ class App extends React.Component {
 
   onStartWatch = (isStart) => () => {
     this.setState({ isWatchStarted: isStart })
-    const currentDateTime = DateTime.local().toString()
+    const currentDateTime = DateTime.local().toUTC()
 
     if (isStart) {
       this.setState({ startAt: currentDateTime })
