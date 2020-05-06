@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import Stopwatch from 'react-stopwatch'
 import { DateTime } from 'luxon'
+import * as R from 'ramda'
 
 const BASE_URL = 'http://localhost:8000'
 class App extends React.Component {
@@ -53,7 +54,12 @@ class App extends React.Component {
   }
 
   removeTask = (taskId) => () => {
-    axios.delete(`${BASE_URL}/tasks/${taskId}`)
+    const isRemovedTasks = (task) => task.id === taskId
+
+    axios.delete(`${BASE_URL}/tasks/${taskId}`).then(() => {
+      const allTasks = R.reject(isRemovedTasks, this.state.allTasks)
+      this.setState({ allTasks })
+    })
   }
 
   onTextChange = (event) => {
