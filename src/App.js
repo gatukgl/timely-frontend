@@ -18,15 +18,32 @@ class App extends React.Component {
     this.getTasks()
   }
 
+  restructureTask = (task) => {
+    const startAt = task.started_at
+    const datetime = DateTime.fromISO(startAt)
+    const startDate = datetime.toLocaleString(DateTime.DATE_HUGE)
+    const startTime = datetime.toLocaleString(DateTime.TIME_WITH_SECONDS)
+    const endTime = datetime.toLocaleString(DateTime.TIME_WITH_SECONDS)
+
+    return {
+      name: task.name,
+      category: task.category,
+      startDate: startDate,
+      startTime: startTime,
+      endTime: endTime
+    }
+  }
+
   getTasks = () => {
     axios.get(`${BASE_URL}/tasks`).then((response) => {
-      this.setState({ allTasks: response.data })
+      this.setState({ allTasks: response.data.map((task) => this.restructureTask(task)) })
     })
   }
 
   createTask = (payload) => {
     axios.post(`${BASE_URL}/tasks`, payload).then((response) => {
-      const newTask = response.data
+      return response.data
+      const newTask = this.restructureTask(response.data)
       const allTasks = this.state.allTasks.concat(newTask)
       this.setState({
         allTasks
@@ -64,7 +81,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('all tasks', this.state.allTasks)
     return (
       <div className='App'>
         <nav className='navbar navbar-expand-lg fixed-top navbar-dark bg-dark'>
@@ -150,7 +166,7 @@ class App extends React.Component {
                       <span>{task.name}</span>
                       <span className='ml-2 badge badge-info'>{task.category}</span>
                     </div>
-                    <div className='col'>{`${task.started_at} - ${task.ended_at}`}</div>
+                    <div className='col'>{`${task.startTime} - ${task.endTime}`}</div>
                     <div className=''>
                       <button className='btn btn-danger'>Remove</button>
                     </div>
