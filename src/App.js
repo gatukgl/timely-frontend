@@ -3,6 +3,7 @@ import axios from 'axios'
 import Stopwatch from 'react-stopwatch'
 import { DateTime } from 'luxon'
 
+const BASE_URL = 'http://localhost:8000'
 class App extends React.Component {
   state = {
     allTasks: [],
@@ -14,9 +15,20 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('localhost:8000/tasks').then(function (response) {
-      console.log(response.json())
-      this.setState({ allTasks: response.json() })
+    this.getTasks()
+  }
+
+  getTasks = () => {
+    axios.get(`${BASE_URL}/tasks`).then((response) => {
+      console.log('response', response.data)
+      this.setState({ allTasks: response.data })
+    })
+  }
+
+  createTask = (payload) => {
+    console.log(payload)
+    axios.post(`${BASE_URL}/tasks`, payload).then(() => {
+      console.log('yay')
     })
   }
 
@@ -35,9 +47,18 @@ class App extends React.Component {
     this.setState({ isWatchStarted: isStart })
     const currentDateTime = DateTime.local().toString()
 
-    isStart
-      ? this.setState({ startAt: currentDateTime })
-      : this.setState({ endAt: currentDateTime })
+    if (isStart) {
+      this.setState({ startAt: currentDateTime })
+    } else {
+      this.setState({ endAt: currentDateTime })
+      const task = {
+        name: this.state.task,
+        category: this.state.category,
+        startedAt: this.state.startAt,
+        endedAt: this.state.endAt
+      }
+      this.createTask(task)
+    }
   }
 
   render() {
