@@ -19,11 +19,12 @@ class App extends React.Component {
   }
 
   restructureTask = (task) => {
-    const startAt = task.started_at
-    const datetime = DateTime.fromISO(startAt)
-    const startDate = datetime.toLocaleString(DateTime.DATE_HUGE)
-    const startTime = datetime.toLocaleString(DateTime.TIME_WITH_SECONDS)
-    const endTime = datetime.toLocaleString(DateTime.TIME_WITH_SECONDS)
+    const startDateTime = DateTime.fromISO(task.started_at)
+    const startDate = startDateTime.toLocaleString(DateTime.DATE_HUGE)
+    const startTime = startDateTime.toLocaleString(DateTime.TIME_WITH_SECONDS)
+
+    const endDateTime = DateTime.fromISO(task.ended_at)
+    const endTime = endDateTime.toLocaleString(DateTime.TIME_WITH_SECONDS)
 
     return {
       id: task.id,
