@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Stopwatch from 'react-stopwatch'
+import { DateTime } from 'luxon'
 
 class App extends React.Component {
   state = {
@@ -30,13 +31,13 @@ class App extends React.Component {
     this.setState({ category: event.target.value })
   }
 
-  onTimeChange = ({ hours, minutes, seconds }) => {
-    console.log(hours, minutes, seconds)
-  }
-
   onStartWatch = (isStart) => () => {
     this.setState({ isWatchStarted: isStart })
-    isStart ? this.setState({ startAt: Date.now() }) : this.setState({ endAt: Date.now() })
+    const currentDateTime = DateTime.local().toString()
+
+    isStart
+      ? this.setState({ startAt: currentDateTime })
+      : this.setState({ endAt: currentDateTime })
   }
 
   render() {
@@ -104,7 +105,6 @@ class App extends React.Component {
                   seconds={0}
                   minutes={0}
                   hours={0}
-                  onChange={this.onTimeChange}
                   render={({ formatted }) => <p>{formatted}</p>}
                 />
               ) : (
