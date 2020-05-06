@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios'
-import Stopwatch from 'react-stopwatch'
 import { DateTime } from 'luxon'
 import * as R from 'ramda'
 
@@ -8,6 +7,7 @@ import { NavBar } from './NavBar'
 import { TaskInput } from './TaskInput'
 import { Categories } from './Categories'
 import { WatchToggledButton } from './WatchToggledButton'
+import { StopWatch } from './StopWatch'
 
 const BASE_URL = 'http://localhost:8000'
 class App extends React.Component {
@@ -105,20 +105,7 @@ class App extends React.Component {
             <TaskInput state={this.state} onChange={this.onTextChange} />
             <Categories selectedCategory={this.state.category} onChange={this.onDropdownChange} />
             <WatchToggledButton isStarted={this.state.isWatchStarted} onStart={this.onStartWatch} />
-
-            <div className='col' style={{ fontSize: '1.9em' }}>
-              {this.state.isWatchStarted ? (
-                <Stopwatch
-                  autoStart={true}
-                  seconds={0}
-                  minutes={0}
-                  hours={0}
-                  render={({ formatted }) => <p>{formatted}</p>}
-                />
-              ) : (
-                '00:00:00'
-              )}
-            </div>
+            <StopWatch isEnabled={this.state.isWatchStarted} />
           </div>
 
           {this.state.allTasks.length < 1 ? (
