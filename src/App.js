@@ -10,6 +10,7 @@ import { WatchToggledButton } from './WatchToggledButton'
 import { StopWatch } from './StopWatch'
 import { Task } from './Task'
 
+import { getTasks } from './apis'
 import { restructureTask } from './utils'
 
 const BASE_URL = 'http://localhost:8000'
@@ -24,12 +25,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getTasks()
-  }
-
-  getTasks = () => {
-    axios.get(`${BASE_URL}/tasks`).then((response) => {
-      this.setState({ allTasks: response.data.map((task) => restructureTask(task)) })
+    const response = getTasks().then((response) => {
+      this.setState({ allTasks: response.map((task) => restructureTask(task)) })
     })
   }
 
