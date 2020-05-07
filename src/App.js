@@ -10,6 +10,8 @@ import { WatchToggledButton } from './WatchToggledButton'
 import { StopWatch } from './StopWatch'
 import { Task } from './Task'
 
+import { restructureTask } from './utils'
+
 const BASE_URL = 'http://localhost:8000'
 class App extends React.Component {
   state = {
@@ -25,33 +27,15 @@ class App extends React.Component {
     this.getTasks()
   }
 
-  restructureTask = (task) => {
-    const startDateTime = DateTime.fromISO(task.started_at)
-    const startDate = startDateTime.toLocaleString(DateTime.DATE_HUGE)
-    const startTime = startDateTime.toLocaleString(DateTime.TIME_WITH_SECONDS)
-
-    const endDateTime = DateTime.fromISO(task.ended_at)
-    const endTime = endDateTime.toLocaleString(DateTime.TIME_WITH_SECONDS)
-
-    return {
-      id: task.id,
-      name: task.name,
-      category: task.category,
-      startDate: startDate,
-      startTime: startTime,
-      endTime: endTime
-    }
-  }
-
   getTasks = () => {
     axios.get(`${BASE_URL}/tasks`).then((response) => {
-      this.setState({ allTasks: response.data.map((task) => this.restructureTask(task)) })
+      this.setState({ allTasks: response.data.map((task) => restructureTask(task)) })
     })
   }
 
   createTask = (payload) => {
     axios.post(`${BASE_URL}/tasks`, payload).then((response) => {
-      const newTask = this.restructureTask(response.data)
+      const newTask = restructureTask(response.data)
       const allTasks = this.state.allTasks.concat(newTask)
       this.setState({
         allTasks
