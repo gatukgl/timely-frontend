@@ -7,7 +7,7 @@ import { TaskInput } from './TaskInput'
 import { Categories } from './Categories'
 import { WatchToggledButton } from './WatchToggledButton'
 import { StopWatch } from './StopWatch'
-import { Task } from './Task'
+import { TasksTable } from './TasksTable'
 
 import { getTasks, createTask, removeTask } from './apis'
 import { restructureTask } from './utils'
@@ -18,7 +18,7 @@ const App = () => {
   const [selectedCategory, setSelectedCategory] = useState('')
   const [isWatchStarted, setWatchStarted] = useState(false)
   const [startedAt, setStartedAt] = useState('')
-  const [setEndedAt] = useState('')
+  const [endedAt, setEndedAt] = useState('')
 
   useEffect(() => {
     getTasks().then((response) => {
@@ -80,18 +80,7 @@ const App = () => {
           <StopWatch isEnabled={isWatchStarted} />
         </div>
 
-        {allTasks.length < 1 ? (
-          <div className='text-center p-5 my-3 rounded shadow-sm text-dark'>
-            <span>No task yet</span>
-          </div>
-        ) : (
-          <div className='my-3 bg-white rounded shadow-sm'>
-            <h6 className='border-bottom border-gray p-3 mb-4'>Today</h6>
-            {allTasks.map((task) => (
-              <Task key={task.id} task={task} removeTask={removeTaskAndSetState(task.id)} />
-            ))}
-          </div>
-        )}
+        <TasksTable allTasks={allTasks} removeTaskAndSetState={removeTaskAndSetState} />
       </div>
     </div>
   )
