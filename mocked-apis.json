@@ -1,0 +1,46 @@
+{
+  "tasks": [
+    {
+      "id": "10",
+      "name": "Learn about React",
+      "category": "Study",
+      "started_at": "2020-05-04T10:14:35+07:00",
+      "ended_at": "2020-05-04T13:14:35+07:00"
+    },
+    {
+      "id": "9",
+      "name": "Go to gym",
+      "category": "Workout",
+      "started_at": "2020-05-04T12:14:35+07:00",
+      "ended_at": "2020-05-04T13:14:35+07:00"
+    },
+    {
+      "id": "8",
+      "name": "Learn how to cook eggfries",
+      "category": "Cooking",
+      "started_at": "2020-05-04T14:14:35+07:00",
+      "ended_at": "2020-05-04T15:14:35+07:00"
+    },
+    {
+      "id": "7",
+      "name": "Learn about JSX",
+      "category": "Study",
+      "started_at": "2020-05-03T14:14:35+07:00",
+      "ended_at": "2020-05-03T15:14:35+07:00"
+    },
+    {
+      "id": "6",
+      "name": "Learn about HTML",
+      "category": "Study",
+      "started_at": "2020-05-03T14:10:35+07:00",
+      "ended_at": "2020-05-03T15:11:35+07:00"
+    },
+    {
+      "id": "5",
+      "name": "Dance with friends",
+      "category": null,
+      "started_at": "2020-05-02T14:10:35+07:00",
+      "ended_at": "2020-05-02T15:11:35+07:00"
+    }
+  ]
+}
