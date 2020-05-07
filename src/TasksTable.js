@@ -1,8 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import * as R from 'ramda'
 
 import { Task } from './Task'
+import { TaskContext } from './TaskContext'
+import { removeTask } from './apis'
 
-export const TasksTable = ({ allTasks, removeTaskAndSetState }) => {
+export const TasksTable = () => {
+  const { allTasks, setAllTasks } = useContext(TaskContext)
+
+  const removeTaskAndSetState = (taskId) => () => {
+    removeTask(taskId).then(() => {
+      const isRemovedTasks = (task) => task.id === taskId
+      const tasks = R.reject(isRemovedTasks, allTasks)
+      setAllTasks(tasks)
+    })
+  }
+
   return (
     <>
       {allTasks.length < 1 ? (
