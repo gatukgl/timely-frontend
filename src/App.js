@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import { DateTime } from 'luxon'
 import * as R from 'ramda'
 
@@ -13,14 +12,13 @@ import { Task } from './Task'
 import { getTasks, createTask, removeTask } from './apis'
 import { restructureTask } from './utils'
 
-const BASE_URL = 'http://localhost:8000'
 const App = () => {
   const [allTasks, setAllTasks] = useState([])
   const [task, setTask] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
   const [isWatchStarted, setWatchStarted] = useState(false)
   const [startedAt, setStartedAt] = useState('')
-  const [endedAt, setEndedAt] = useState('')
+  const [setEndedAt] = useState('')
 
   useEffect(() => {
     getTasks().then((response) => {
@@ -42,10 +40,6 @@ const App = () => {
   }
 
   const onCategoryChange = (event) => {
-    setTask(event.target.value)
-  }
-
-  const onDropdownChange = (event) => {
     setSelectedCategory(event.target.value)
   }
 
@@ -81,7 +75,7 @@ const App = () => {
       <div className='container' role='main' style={{ marginTop: '100px' }}>
         <div className='row'>
           <TaskInput state={task} onChange={onTaskChange} />
-          <Categories selectedCategory={selectedCategory} onChange={onDropdownChange} />
+          <Categories selectedCategory={selectedCategory} onChange={onCategoryChange} />
           <WatchToggledButton isStarted={isWatchStarted} onStart={onStartWatch} />
           <StopWatch isEnabled={isWatchStarted} />
         </div>
