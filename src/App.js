@@ -10,7 +10,7 @@ import { WatchToggledButton } from './WatchToggledButton'
 import { StopWatch } from './StopWatch'
 import { Task } from './Task'
 
-import { getTasks } from './apis'
+import { getTasks, createTask, removeTask } from './apis'
 import { restructureTask } from './utils'
 
 const BASE_URL = 'http://localhost:8000'
@@ -30,20 +30,9 @@ class App extends React.Component {
     })
   }
 
-  createTask = (payload) => {
-    axios.post(`${BASE_URL}/tasks`, payload).then((response) => {
-      const newTask = restructureTask(response.data)
-      const allTasks = this.state.allTasks.concat(newTask)
-      this.setState({
-        allTasks
-      })
-    })
-  }
-
   removeTask = (taskId) => () => {
-    const isRemovedTasks = (task) => task.id === taskId
-
-    axios.delete(`${BASE_URL}/tasks/${taskId}`).then(() => {
+    removeTask(taskId).then(() => {
+      const isRemovedTasks = (task) => task.id === taskId
       const allTasks = R.reject(isRemovedTasks, this.state.allTasks)
       this.setState({ allTasks })
     })
@@ -76,6 +65,16 @@ class App extends React.Component {
       }
       this.createTask(task)
     }
+  }
+
+  createTask = (task) => {
+    createTask(task).then((response) => {
+      const newTask = restructureTask(response)
+      const allTasks = this.state.allTasks.concat(newTask)
+      this.setState({
+        allTasks
+      })
+    })
   }
 
   render() {
