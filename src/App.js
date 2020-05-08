@@ -104,7 +104,7 @@ class App extends React.Component {
           ) : (
             <div className='my-3 bg-white rounded shadow-sm'>
               {this.state.allTasks.reverse().map((task) => (
-                <Task task={task} removeTask={this.removeTask(task.id)} />
+                <Task task={task} />
               ))}
             </div>
           )}
