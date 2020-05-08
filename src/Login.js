@@ -7,13 +7,13 @@ class Login extends React.Component {
   }
 
   onChange = (event) => {
-    this.setState({ name: event.target.value })
+    this.setState({ username: event.target.value })
   }
 
   onClickSubmit = (event) => {
     event.preventDefault()
     this.props.history.push('/main')
-    window.sessionStorage.setItem('name', this.state.name)
+    window.sessionStorage.setItem('username', this.state.username)
   }
 
   render() {
@@ -23,21 +23,21 @@ class Login extends React.Component {
         <div className='col'>
           <div className='container'>
             <form className='form-signin '>
-              <h1 className='mb-4'>Please enter your name</h1>
+              <h1 className='mb-4'>Please enter your username</h1>
               <input
                 type='text'
-                id='name'
+                id='username'
                 className='form-control mb-3'
-                placeholder='Gatuk'
+                placeholder='gatukgl'
                 required
                 autoFocus
-                value={this.state.name}
+                value={this.state.username}
                 onChange={this.onChange}
               />
 
               <button
                 className='btn btn-lg btn-primary btn-block'
-                disabled={!this.state.name}
+                disabled={!this.state.username}
                 onClick={this.onClickSubmit}
               >
                 Sign in

@@ -14,6 +14,7 @@ class App extends React.Component {
     allTasks: [],
     task: '',
     category: '',
+    username: '',
     isWatchStarted: false,
     startAt: '',
     endAt: ''
@@ -31,6 +32,7 @@ class App extends React.Component {
       id: task.id,
       name: task.name,
       category: task.category,
+      username: task.username,
       startDate: startDate,
       startTime: startTime,
       endTime: endTime
@@ -71,9 +73,11 @@ class App extends React.Component {
       this.setState({ startAt: currentDateTime })
     } else {
       this.setState({ endAt: currentDateTime })
+      const username = window.sessionStorage.getItem('username')
       const task = {
         name: this.state.task,
         category: this.state.category,
+        username: username,
         started_at: this.state.startAt,
         ended_at: currentDateTime
       }

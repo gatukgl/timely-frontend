@@ -14,6 +14,7 @@ export const Task = ({ task, removeTask }) => (
         <span>{task.name}</span>
         <span className='ml-2 badge badge-info'>{task.category}</span>
       </div>
+      <div className='col'>{`${task.username}`}</div>
       <div className='col'>{`${getCurrentDate()}`}</div>
       <div className='col'>{`${task.startTime} - ${task.endTime}`}</div>
       <div className=''>
