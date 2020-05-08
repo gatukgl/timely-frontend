@@ -1,11 +1,13 @@
 import React from 'react'
 
 export const NavBar = () => {
+  const name = window.sessionStorage.getItem('name')
   return (
-    <nav className='navbar navbar-expand-lg fixed-top navbar-dark bg-dark'>
-      <a className='navbar-brand mr-auto mr-lg-0' href='.'>
+    <nav className='navbar fixed-top navbar-dark bg-dark'>
+      <a className='navbar-brand' href='.'>
         Timely
       </a>
+      <div className='text-white'>{name}</div>
     </nav>
   )
 }
