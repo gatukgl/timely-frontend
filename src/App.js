@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import { DateTime } from 'luxon'
 import * as R from 'ramda'
 
@@ -10,7 +9,6 @@ import { WatchToggledButton } from './WatchToggledButton'
 import { StopWatch } from './StopWatch'
 import { Task } from './Task'
 
-const BASE_URL = 'http://localhost:8000'
 class App extends React.Component {
   state = {
     allTasks: [],
@@ -19,10 +17,6 @@ class App extends React.Component {
     isWatchStarted: false,
     startAt: '',
     endAt: ''
-  }
-
-  componentDidMount() {
-    this.getTasks()
   }
 
   restructureTask = (task) => {
@@ -43,29 +37,19 @@ class App extends React.Component {
     }
   }
 
-  getTasks = () => {
-    axios.get(`${BASE_URL}/tasks`).then((response) => {
-      this.setState({ allTasks: response.data.map((task) => this.restructureTask(task)) })
-    })
-  }
-
-  createTask = (payload) => {
-    axios.post(`${BASE_URL}/tasks`, payload).then((response) => {
-      const newTask = this.restructureTask(response.data)
-      const allTasks = this.state.allTasks.concat(newTask)
-      this.setState({
-        allTasks
-      })
+  createTask = (task) => {
+    const newTask = this.restructureTask(task)
+    const allTasks = this.state.allTasks.concat(newTask)
+    this.setState({
+      allTasks
     })
   }
 
   removeTask = (taskId) => () => {
     const isRemovedTasks = (task) => task.id === taskId
 
-    axios.delete(`${BASE_URL}/tasks/${taskId}`).then(() => {
-      const allTasks = R.reject(isRemovedTasks, this.state.allTasks)
-      this.setState({ allTasks })
-    })
+    const allTasks = R.reject(isRemovedTasks, this.state.allTasks)
+    this.setState({ allTasks })
   }
 
   onTextChange = (event) => {
