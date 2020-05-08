@@ -1,10 +1,10 @@
 import React from 'react'
 
 const getCurrentDate = () => {
-  let current_datetime = new Date()
-  let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate()
+  let currentDatetime = new Date()
+  let formattedDate = currentDatetime.getFullYear() + "-" + (currentDatetime.getMonth() + 1) + "-" + currentDatetime.getDate()
 
-  return formatted_date
+  return formattedDate
 }
 
 export const Task = ({ task, removeTask }) => (
