@@ -99,7 +99,6 @@ class App extends React.Component {
             </div>
           ) : (
             <div className='my-3 bg-white rounded shadow-sm'>
-              <h6 className='border-bottom border-gray p-3 mb-4'>Today</h6>
               {this.state.allTasks.map((task) => (
                 <Task task={task} removeTask={this.removeTask(task.id)} />
               ))}
