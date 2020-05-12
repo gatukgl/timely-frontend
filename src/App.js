@@ -1,5 +1,4 @@
 import React from 'react'
-import { DateTime } from 'luxon'
 import * as R from 'ramda'
 
 import { NavBar } from './NavBar'
@@ -8,6 +7,7 @@ import { Categories } from './Categories'
 import { WatchToggledButton } from './WatchToggledButton'
 import { StopWatch } from './StopWatch'
 import { Task } from './Task'
+import { nowUTC, convertUTCtoLocal } from './datetimeUtils'
 
 class App extends React.Component {
   state = {
@@ -16,17 +16,17 @@ class App extends React.Component {
     category: '',
     username: '',
     isWatchStarted: false,
-    startAt: '',
-    endAt: ''
+    startedAt: '',
+    endedAt: ''
   }
 
-  restructureTask = (task) => {
-    const startDateTime = DateTime.fromISO(task.started_at)
-    const startDate = startDateTime.toLocaleString(DateTime.DATE_HUGE)
-    const startTime = startDateTime.toLocaleString(DateTime.TIME_WITH_SECONDS)
+  restructureTaskIntoState = (task) => {
+    const startDateTime = convertUTCtoLocal(task.started_at)
+    const startDate = startDateTime.date
+    const startTime = startDateTime.time
 
-    const endDateTime = DateTime.fromISO(task.ended_at)
-    const endTime = endDateTime.toLocaleString(DateTime.TIME_WITH_SECONDS)
+    const endDateTime = convertUTCtoLocal(task.ended_at)
+    const endTime = endDateTime.time
 
     return {
       id: task.id,
@@ -40,7 +40,7 @@ class App extends React.Component {
   }
 
   createTask = (task) => {
-    const newTask = this.restructureTask(task)
+    const newTask = this.restructureTaskIntoState(task)
     const allTasks = this.state.allTasks.concat(newTask)
     this.setState({
       allTasks
@@ -67,19 +67,19 @@ class App extends React.Component {
 
   onStartWatch = (isStart) => () => {
     this.setState({ isWatchStarted: isStart })
-    const currentDateTime = DateTime.local().toUTC()
+    const currentDateTime = nowUTC()
 
     if (isStart) {
-      this.setState({ startAt: currentDateTime })
+      this.setState({ startedAt: currentDateTime })
     } else {
-      this.setState({ endAt: currentDateTime })
+      this.setState({ endedAt: currentDateTime })
       const username = window.sessionStorage.getItem('username')
       const task = {
         name: this.state.task,
         category: this.state.category,
-        username: username,
-        started_at: this.state.startAt,
-        ended_at: currentDateTime
+        started_at: this.state.startedAt,
+        ended_at: currentDateTime,
+        username: username
       }
       this.createTask(task)
     }

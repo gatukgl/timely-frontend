@@ -12,7 +12,7 @@ class Login extends React.Component {
 
   onClickSubmit = (event) => {
     event.preventDefault()
-    this.props.history.replace('/main')
+    this.props.history.replace('/app')
     window.sessionStorage.setItem('username', this.state.username)
   }
 
